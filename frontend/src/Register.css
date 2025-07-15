@@ -1,0 +1,69 @@
+.register-container {
+  height: 100vh;
+  background: linear-gradient(to right, #74ebd5, #acb6e5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-card {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+}
+
+.register-card input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.register-card button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.register-card button:hover {
+  background-color: #45a049;
+}
+
+.register-card a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.password-rules ul {
+  margin-top: 10px;
+  margin-right: 50px;
+  padding-left: 20px;
+  font-size: 14px;
+}
+.password-rules li.valid {
+  color: green;
+}
+.password-rules li.invalid {
+  color: red;
+}
+.success-message {
+  color: green;
+  font-weight: bold;
+}
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
