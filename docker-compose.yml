@@ -1,20 +1,58 @@
+version: '3.8'
+
 services:
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Postmalone0751@
+      MYSQL_DATABASE: tododb
+    ports:
+      - "3307:3306"  # Externe:Interne
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - app-network
+
   backend:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: spring-backend
+    restart: always
+    environment:
+      DB_URL: jdbc:mysql://db:3306/tododb
+      DB_USERNAME: root
+      DB_PASSWORD: Postmalone0751@
+      EMAIL_USERNAME: younsiadam2021@gmail.com
+      EMAIL_PASSWORD: brpj evfx ddqm enbi
+      JWT_SECRET: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZGFtIiwiaWF0IjoxNzUyMDYwMDgyLCJleHAiOjE3NTIwOTYwODJ9.f0ujt4D0j5E5N2ErarP4ZworLuWK6PAhoIZA_Fi4J1o
+    depends_on:
+      - db
     ports:
       - "8080:8080"
-    depends_on:
-      db:
-        condition: service_healthy
-    command: ["./wait-for-it.sh", "db:3306", "--", "java", "-jar", "target/backend-0.0.1-SNAPSHOT.jar"]
+    networks:
+      - app-network
 
-  db:
-    image: mysql:8
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: react-frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: tododb
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 5s
-      timeout: 10s
-      retries: 10
+      - REACT_APP_API_URL=http://backend:8080
+    networks:
+      - app-network
+
+volumes:
+  db-data:
+
+networks:
+  app-network:
+    driver: bridge
