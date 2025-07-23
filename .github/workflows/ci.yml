@@ -94,7 +94,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/ayoun07/backend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/backend:latest
 
       - name: Build and push frontend image
         uses: docker/build-push-action@v3
@@ -102,7 +102,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: ghcr.io/ayoun07/frontend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/frontend:latest
 
   notify:
     runs-on: ubuntu-latest
