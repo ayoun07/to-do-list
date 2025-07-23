@@ -22,6 +22,9 @@ const getInitialRoute = () => {
   return token ? "/tasks" : "/login";
 };
 
+console.log(getInitialRoute());
+
+
 
 function App() {
   return (

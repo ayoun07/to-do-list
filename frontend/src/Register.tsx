@@ -27,6 +27,8 @@ function Register() {
   const validateEmail = (email: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+  console.log(validateEmail("test@example.com"));
+
   const passwordErrors = validatePassword(password);
   const isPasswordValid = passwordErrors.length === 0;
   const passwordsMatch = password === confirmPassword;
