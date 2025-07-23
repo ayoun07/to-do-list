@@ -42,14 +42,10 @@ jobs:
           distribution: 'temurin'
 
       - name: Run backend tests
-        run: |
-          cd backend
-          ./mvnw test
+        run: ./mvnw test
 
       - name: Build backend
-        run: |
-          cd backend
-          ./mvnw clean install -DskipTests
+        run: ./mvnw clean install -DskipTests
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
