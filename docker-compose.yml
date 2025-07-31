@@ -46,6 +46,7 @@ services:
     ports:
       - "3000:80"
     environment:
+      - DISABLE_ESLINT_PLUGIN=true
       - REACT_APP_API_URL=http://backend:8080
     networks:
       - app-network

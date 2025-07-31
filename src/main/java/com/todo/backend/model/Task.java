@@ -18,6 +18,9 @@ public class Task {
     @Column(nullable = false)
     private String title;
 
+    @Column(length = 1000)
+    private String description;
+
     private Boolean completed = false;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -30,6 +33,7 @@ public class Task {
     private ListEntity list;
 
     // === Getters and Setters ===
+
 
 
     public Long getId() {
@@ -46,6 +50,14 @@ public class Task {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Boolean isCompleted() {
@@ -75,6 +87,4 @@ public class Task {
     public void setList(ListEntity list) {
         this.list = list;
     }    
-
-    
 }

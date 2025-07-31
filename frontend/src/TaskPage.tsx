@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import MainContent from "./MainContent";
@@ -29,8 +30,9 @@ function TaskPage() {
     if (selectedListId !== null) {
       fetchTasks(selectedListId);
     } else {
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      [selectedListId]; // clear tasks if no list is selected
+      
+      
+      setTasks([]); // clear tasks if no list is selected
     }
   }, [selectedListId]);
 

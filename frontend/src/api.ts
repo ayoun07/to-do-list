@@ -1,9 +1,8 @@
 import axios from "axios";
 import { Task } from "./Task";
 
-const BASE_URL = process.env.REACT_APP_API_URL; // ← depuis .env
+const BASE_URL = process.env.REACT_APP_API_URL; // depuis .env
 
-// ✅ Instance Axios avec intercepteur
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {

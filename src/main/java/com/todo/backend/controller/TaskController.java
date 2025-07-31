@@ -23,12 +23,14 @@ public class TaskController {
     private final UserRepository userRepo;
     private final ListRepository listRepo;
 
+    // Injection des dépendances via le constructeur
     public TaskController(TaskRepository taskRepo, UserRepository userRepo, ListRepository listRepo) {
         this.taskRepo = taskRepo;
         this.userRepo = userRepo;
         this.listRepo = listRepo;
     }
 
+    // Récupère les tâches d'une liste donnée, seulement si elle appartient à l'utilisateur connecté
     @GetMapping("/list/{listId}")
     public List<Task> getTasksByList(@PathVariable Long listId, Authentication auth) {
         String username = auth.getName();
@@ -42,13 +44,14 @@ public class TaskController {
         return taskRepo.findByListAndUser(list, user);
     }
 
-
+    // Récupère toutes les tâches de l'utilisateur connecté
     @GetMapping
     public List<Task> getTasks(Authentication auth) {
         User user = userRepo.findByUsername(auth.getName()).orElseThrow();
         return taskRepo.findByUser(user);
     }
 
+    // Ajoute une nouvelle tâche pour l'utilisateur connecté (et la lie à une liste si présente)
     @PostMapping
     public Task addTask(@RequestBody Task task, Authentication auth) {
         User user = userRepo.findByUsername(auth.getName()).orElseThrow();
@@ -63,6 +66,7 @@ public class TaskController {
         return taskRepo.save(task);
     }
 
+    // Met à jour une tâche (titre + état terminé)
     @PutMapping("/{id}")
     public Task updateTask(@PathVariable Long id, @RequestBody Task updatedTask) {
         return taskRepo.findById(id).map(task -> {
@@ -72,6 +76,7 @@ public class TaskController {
         }).orElseThrow();
     }
 
+    // Supprime une tâche par son id
     @DeleteMapping("/{id}")
     public void deleteTask(@PathVariable Long id) {
         taskRepo.deleteById(id);

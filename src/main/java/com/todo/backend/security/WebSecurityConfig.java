@@ -33,6 +33,8 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/error").permitAll() // ✅ Ajout crucial pour corriger l'erreur 403
+                        .requestMatchers("/api/tasks/ai/suggest-task").authenticated()
                         .requestMatchers("/api/tasks/**").authenticated()
                         .anyRequest().authenticated()
                 )
@@ -66,7 +68,4 @@ public class WebSecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
-
-   
-
 }
